@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XConnect Radio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .welcome-container {
+            text-align: center;
+            backdrop-filter: blur(10px);
+            padding: 50px 80px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .welcome-container h1 {
+            font-size: 3rem;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+        }
+
+        /* Input fields style */
+        .welcome-container input {
+            width: 80%;
+            max-width: 300px;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 10px;
+            outline: none;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .welcome-container input::placeholder {
+            color: #eee;
+        }
+
+        /* Button style */
+        .welcome-container button {
+            width: 85%;
+            max-width: 320px;
+            padding: 12px 20px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fff;
+            background: #6a11cb;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .welcome-container button:hover {
+            background: #2575fc;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-container">
+        <h1>Welcome to XConnect Radio</h1>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Enter Username" id="username">
+            <input type="text" name="xconnect-number" placeholder="Enter XConnect Number" id="xconnect-number">
+            <button onclick="connectChat()">Connect to Chat</button>
+        </form>
+    </div>
+
+    <script>
+        function connectChat() {
+            const username = document.getElementById('username').value;
+            const xconnectNumber = document.getElementById('xconnect-number').value;
+
+            if(username && xconnectNumber) {
+                alert(`Connecting ${username} with XConnect Number: ${xconnectNumber}...`);
+                // You can replace alert with actual chat connection logic
+            } else {
+                alert('Please enter both username and XConnect number.');
+            }
+        }
+    </script>
+</body>
+</html>
