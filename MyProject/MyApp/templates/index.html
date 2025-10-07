@@ -1,9 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XConnect Radio</title>
+    <title>XConnect Radio | Login</title>
     <style>
         * {
             margin: 0;
@@ -17,12 +18,12 @@
             justify-content: center;
             align-items: center;
             font-family: 'Arial', sans-serif;
-            background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+            background: url('https://images.unsplash.com/photo-1758551051834-61f10a361b73?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
             color: #fff;
             overflow: hidden;
         }
 
-        .welcome-container {
+        .login-container {
             text-align: center;
             backdrop-filter: blur(10px);
             padding: 50px 80px;
@@ -32,15 +33,14 @@
             animation: fadeIn 2s ease-in-out;
         }
 
-        .welcome-container h1 {
+        .login-container h1 {
             font-size: 3rem;
             letter-spacing: 2px;
             text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
             margin-bottom: 30px;
         }
 
-        /* Input fields style */
-        .welcome-container input {
+        .login-container input {
             width: 80%;
             max-width: 300px;
             padding: 12px 15px;
@@ -53,12 +53,11 @@
             color: #fff;
         }
 
-        .welcome-container input::placeholder {
+        .login-container input::placeholder {
             color: #eee;
         }
 
-        /* Button style */
-        .welcome-container button {
+        .login-container button {
             width: 85%;
             max-width: 320px;
             padding: 12px 20px;
@@ -73,40 +72,62 @@
             transition: all 0.3s ease;
         }
 
-        .welcome-container button:hover {
+        .login-container button:hover {
             background: #2575fc;
             transform: scale(1.05);
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px);}
-            to { opacity: 1; transform: translateY(0);}
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .extra-links {
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .extra-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .extra-links a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="welcome-container">
-        <h1>Welcome to XConnect Radio</h1>
+    <div class="login-container">
+        <h1>Login to XConnect Radio</h1>
+            {% if error %}
+                <div style="color: #ffb3b3; margin-bottom: 15px; font-weight: bold;">{{ error }}</div>
+            {% endif %}
         <form method="POST" action="">
             {% csrf_token %}
-            <input type="text" name="username" placeholder="Enter Username" id="username">
-            <input type="text" name="xconnect-number" placeholder="Enter XConnect Number" id="xconnect-number">
-            <button onclick="connectChat()">Connect to Chat</button>
+            <input type="email" name="email" placeholder="Enter Email" id="email" required>
+            <input type="password" name="password" placeholder="Enter Password" id="password" required>
+                <button type="submit">Login</button>
         </form>
+
+        <div class="extra-links">
+            <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+        </div>
     </div>
 
-    <script>
-        function connectChat() {
-            const username = document.getElementById('username').value;
-            const xconnectNumber = document.getElementById('xconnect-number').value;
+    <!-- <script>
+        function loginUser() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
 
-            if(username && xconnectNumber) {
-                alert(`Connecting ${username} with XConnect Number: ${xconnectNumber}...`);
-                // You can replace alert with actual chat connection logic
+            if (email && password) {
+                alert(`Logging in with Email: ${email}`);
+                // Replace this with your actual login logic or redirect
             } else {
-                alert('Please enter both username and XConnect number.');
+                alert('Please enter both email and password.');
             }
         }
-    </script>
+    </script> -->
 </body>
 </html>
